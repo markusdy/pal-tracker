@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequestMapping("time-entries")
 public class TimeEntryController {
 
     private TimeEntryRepository ter;
@@ -16,13 +17,13 @@ public class TimeEntryController {
         this.ter = timeEntryRepository;
     }
 
-    @DeleteMapping("/time-entries/{timeEntryId}")
+    @DeleteMapping("{timeEntryId}")
     public ResponseEntity delete(@PathVariable Long timeEntryId) {
         ter.delete(timeEntryId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/time-entries/{timeEntryId}")
+    @PutMapping("{timeEntryId}")
     public ResponseEntity update(@PathVariable Long timeEntryId, @RequestBody TimeEntry timeEntry) {
         TimeEntry timeEntry2 = ter.update(timeEntryId, timeEntry);
         if (timeEntry2 == null){
@@ -32,7 +33,7 @@ public class TimeEntryController {
         }
     }
 
-    @GetMapping("/time-entries")
+    @GetMapping()
     public ResponseEntity<List<TimeEntry>> list() {
 
 
@@ -40,7 +41,7 @@ public class TimeEntryController {
 
     }
 
-    @GetMapping("/time-entries/{timeEntryId}")
+    @GetMapping("/{timeEntryId}")
     public ResponseEntity<TimeEntry> read(@PathVariable Long timeEntryId) {
         TimeEntry timeEntry = ter.find(timeEntryId);
         if (timeEntry == null){
@@ -51,7 +52,7 @@ public class TimeEntryController {
 
     }
 
-    @PostMapping(value = "/time-entries")
+    @PostMapping()
     public ResponseEntity<TimeEntry> create(@RequestBody TimeEntry timeEntryToCreate) {
         System.out.println(timeEntryToCreate);
         return new ResponseEntity<TimeEntry>(ter.create(timeEntryToCreate), HttpStatus.CREATED);

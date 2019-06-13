@@ -29,6 +29,9 @@ repositories {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+    compile("javax.xml.bind:jaxb-api:2.3.0")
+    compile('org.javassist:javassist:3.23.1-GA') {force = true}
 
     compile("mysql:mysql-connector-java:6.0.6")
 
